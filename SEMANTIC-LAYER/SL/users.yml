@@ -1,0 +1,21 @@
+version: 2
+models:
+- name: users
+  description: ''
+  columns:
+  - name: user_id
+    description: ''
+    data_type: integer
+    nullable: false
+  - name: signup_date
+    description: ''
+    data_type: timestamp without time zone
+    nullable: false
+  - name: country
+    description: ''
+    data_type: character varying
+    nullable: false
+  - name: device_type
+    description: ''
+    data_type: character varying
+    nullable: false

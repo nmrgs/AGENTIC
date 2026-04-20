@@ -1,0 +1,29 @@
+version: 2
+models:
+- name: subscriptions
+  description: ''
+  columns:
+  - name: subscription_id
+    description: ''
+    data_type: integer
+    nullable: false
+  - name: user_id
+    description: ''
+    data_type: integer
+    nullable: false
+  - name: plan
+    description: ''
+    data_type: character varying
+    nullable: false
+  - name: start_date
+    description: ''
+    data_type: timestamp without time zone
+    nullable: false
+  - name: end_date
+    description: ''
+    data_type: timestamp without time zone
+    nullable: true
+  - name: status
+    description: ''
+    data_type: character varying
+    nullable: false
