@@ -1,0 +1,86 @@
+table: sessions
+description: Each row represents a record in the sessions table.
+
+primary_key: session_id
+
+relationships:
+  - field: user_id
+    references:
+      table: users
+      field: user_id
+    type: many_to_one
+
+fields:
+  - name: session_id
+    description: unique identifier for the session.
+    data_type: integer
+    nullable: false
+
+  - name: user_id
+    description: foreign key linking to the users table.
+    data_type: integer
+    nullable: false
+
+  - name: session_date
+    description: date and time when the session occurred.
+    data_type: timestamp without time zone
+    nullable: false
+
+  - name: duration_minutes
+    description: duration of the session in minutes.
+    data_type: integer
+    nullable: false
+
+  - name: activity_type
+    description: the main activity performed during the session (e.g., browse, listen, read).
+    data_type: character varying
+    nullable: false
+
+measures:
+  - name: session_id_count
+    formula: count(session_id)
+    description: Total number of records in sessions.
+
+  - name: earliest_session_date
+    formula: min(session_date)
+    description: Earliest session_date.
+
+  - name: latest_session_date
+    formula: max(session_date)
+    description: Most recent session_date.
+
+  - name: total_duration_minutes
+    formula: sum(duration_minutes)
+    description: Sum of duration_minutes across all records.
+
+  - name: avg_duration_minutes
+    formula: avg(duration_minutes)
+    description: Average duration_minutes across all records.
+
+golden_queries:
+  - name: session_stats_by_activity
+    description: average duration and session count by activity type.
+    sql: |
+      select
+          s.activity_type,
+          count(s.session_id) as session_count,
+          avg(s.duration_minutes) as avg_duration,
+          sum(s.duration_minutes) as total_duration
+      from sessions as s
+      group by s.activity_type
+      order by session_count desc;
+
+  - name: sessions_by_user_country
+    description: total sessions and average duration per user country using an explicit join to users.
+    sql: |
+      select
+          u.country,
+          count(s.session_id) as session_count,
+          avg(s.duration_minutes) as avg_duration,
+          sum(s.duration_minutes) as total_duration
+      from sessions as s
+      inner join users as u
+          on s.user_id = u.user_id
+      group by u.country
+      order by session_count desc;
+

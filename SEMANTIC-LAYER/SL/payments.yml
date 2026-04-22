@@ -1,0 +1,86 @@
+table: payments
+description: Each row represents a record in the payments table.
+
+primary_key: payment_id
+
+relationships:
+  - field: subscription_id
+    references:
+      table: subscriptions
+      field: subscription_id
+    type: many_to_one
+
+fields:
+  - name: payment_id
+    description: unique identifier for the payment.
+    data_type: integer
+    nullable: false
+
+  - name: subscription_id
+    description: foreign key linking to the subscriptions table.
+    data_type: integer
+    nullable: false
+
+  - name: payment_date
+    description: date when the payment was made.
+    data_type: timestamp without time zone
+    nullable: false
+
+  - name: amount_usd
+    description: the payment amount in usd.
+    data_type: numeric
+    nullable: false
+
+  - name: method
+    description: the payment method used (e.g., card, paypal).
+    data_type: character varying
+    nullable: false
+
+measures:
+  - name: payment_id_count
+    formula: count(payment_id)
+    description: Total number of records in payments.
+
+  - name: earliest_payment_date
+    formula: min(payment_date)
+    description: Earliest payment_date.
+
+  - name: latest_payment_date
+    formula: max(payment_date)
+    description: Most recent payment_date.
+
+  - name: total_amount_usd
+    formula: sum(amount_usd)
+    description: Sum of amount_usd across all records.
+
+  - name: avg_amount_usd
+    formula: avg(amount_usd)
+    description: Average amount_usd across all records.
+
+golden_queries:
+  - name: revenue_by_method
+    description: total revenue and payment count grouped by payment method.
+    sql: |
+      select
+          p.method,
+          count(p.payment_id) as payment_count,
+          sum(p.amount_usd) as total_revenue,
+          avg(p.amount_usd) as avg_payment
+      from payments as p
+      group by p.method
+      order by total_revenue desc;
+
+  - name: revenue_by_subscription_plan
+    description: total revenue per subscription plan using an explicit join to subscriptions.
+    sql: |
+      select
+          sub.plan,
+          count(p.payment_id) as payment_count,
+          sum(p.amount_usd) as total_revenue,
+          avg(p.amount_usd) as avg_payment
+      from payments as p
+      inner join subscriptions as sub
+          on p.subscription_id = sub.subscription_id
+      group by sub.plan
+      order by total_revenue desc;
+
