@@ -74,13 +74,12 @@ golden_queries:
     description: total revenue per subscription plan using an explicit join to subscriptions.
     sql: |
       select
-          sub.plan,
-          count(p.payment_id) as payment_count,
-          sum(p.amount_usd) as total_revenue,
-          avg(p.amount_usd) as avg_payment
+        sub.plan,
+        count(p.payment_id) as payment_count,
+        sum(p.amount_usd) as total_revenue,
+        avg(p.amount_usd) as avg_payment
       from payments as p
-      inner join subscriptions as sub
-          on p.subscription_id = sub.subscription_id
+        inner join subscriptions as sub on p.subscription_id = sub.subscription_id
       group by sub.plan
       order by total_revenue desc;
 

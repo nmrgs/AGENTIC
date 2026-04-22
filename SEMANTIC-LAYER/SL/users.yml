@@ -54,9 +54,9 @@ golden_queries:
     description: monthly signup count by device type.
     sql: |
       select
-          date_trunc('month', u.signup_date) as signup_month,
-          u.device_type,
-          count(u.user_id) as user_count
+        date_trunc('month', u.signup_date) as signup_month,
+        u.device_type,
+        count(u.user_id) as user_count
       from users as u
       group by date_trunc('month', u.signup_date), u.device_type
       order by signup_month, user_count desc;
