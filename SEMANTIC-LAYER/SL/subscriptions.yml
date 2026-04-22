@@ -1,29 +1,51 @@
-version: 2
-models:
-- name: subscriptions
-  description: ''
-  columns:
+table: subscriptions
+description: each row is a single transaction linked to a subscription 
+
+primary_key: payment_id
+
+relationships:
+  - field: subscription_id
+    references: 
+      table: subscriptions
+      field: subscription_id
+    type: many_to_one
+
+fields:
+  - name: payment_id
+    description: unique identifier for each payment/transaction.
+    data_type: integer
+    nullable: false
+
   - name: subscription_id
-    description: ''
+    description: foreign key referencing subscriptions.subscription_id
     data_type: integer
     nullable: false
-  - name: user_id
-    description: ''
-    data_type: integer
-    nullable: false
-  - name: plan
-    description: ''
-    data_type: character varying
-    nullable: false
-  - name: start_date
-    description: ''
+
+  - name: payment_date
+    description: timestamp of the payment.
     data_type: timestamp without time zone
     nullable: false
-  - name: end_date
-    description: ''
-    data_type: timestamp without time zone
-    nullable: true
-  - name: status
-    description: ''
+
+  - name: amount_usd
+    description: payment amount in us dollars, always positive.
+    data_type: numeric
+    nullable: false
+
+  - name: method
+    description: payment method used by the user (e.g card , paypal , apple_pay ..).
     data_type: character varying
     nullable: false
+
+measures: 
+  - name: total_revenue
+    formula: sum(total_revenue)
+    description: total revenue generated from all payment transactions.
+  
+  - name: payment_count
+    formula: count(payment_id)
+    description: Total number of payment transactions.
+
+  - name: avg_payment_amount
+    formula: avg(amount_usd)
+    description: Average payment amount across all transactions.
+
