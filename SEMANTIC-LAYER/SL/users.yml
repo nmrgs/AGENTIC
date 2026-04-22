@@ -1,0 +1,63 @@
+table: users
+description: Each row represents a record in the users table.
+
+primary_key: user_id
+
+relationships: []
+
+fields:
+  - name: user_id
+    description: unique identifier for the user.
+    data_type: integer
+    nullable: false
+
+  - name: signup_date
+    description: date and time when the user signed up.
+    data_type: timestamp without time zone
+    nullable: false
+
+  - name: country
+    description: user's country, based on ip geolocation during signup.
+    data_type: character varying
+    nullable: false
+
+  - name: device_type
+    description: the type of device used for signing up (e.g., ios, android, web).
+    data_type: character varying
+    nullable: false
+
+measures:
+  - name: user_id_count
+    formula: count(user_id)
+    description: Total number of records in users.
+
+  - name: earliest_signup_date
+    formula: min(signup_date)
+    description: Earliest signup_date.
+
+  - name: latest_signup_date
+    formula: max(signup_date)
+    description: Most recent signup_date.
+
+golden_queries:
+  - name: users_by_country
+    description: user count by country.
+    sql: |
+      select
+          u.country,
+          count(u.user_id) as user_count
+      from users as u
+      group by u.country
+      order by user_count desc;
+
+  - name: monthly_signups_by_device
+    description: monthly signup count by device type.
+    sql: |
+      select
+          date_trunc('month', u.signup_date) as signup_month,
+          u.device_type,
+          count(u.user_id) as user_count
+      from users as u
+      group by date_trunc('month', u.signup_date), u.device_type
+      order by signup_month, user_count desc;
+

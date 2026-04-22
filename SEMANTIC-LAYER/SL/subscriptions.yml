@@ -1,51 +1,89 @@
 table: subscriptions
-description: each row is a single transaction linked to a subscription 
+description: Each row represents a record in the subscriptions table.
 
-primary_key: payment_id
+primary_key: subscription_id
 
 relationships:
-  - field: subscription_id
-    references: 
-      table: subscriptions
-      field: subscription_id
+  - field: user_id
+    references:
+      table: users
+      field: user_id
     type: many_to_one
 
 fields:
-  - name: payment_id
-    description: unique identifier for each payment/transaction.
-    data_type: integer
-    nullable: false
-
   - name: subscription_id
-    description: foreign key referencing subscriptions.subscription_id
+    description: unique identifier for the subscription.
     data_type: integer
     nullable: false
 
-  - name: payment_date
-    description: timestamp of the payment.
-    data_type: timestamp without time zone
+  - name: user_id
+    description: foreign key linking to the users table.
+    data_type: integer
     nullable: false
 
-  - name: amount_usd
-    description: payment amount in us dollars, always positive.
-    data_type: numeric
-    nullable: false
-
-  - name: method
-    description: payment method used by the user (e.g card , paypal , apple_pay ..).
+  - name: plan
+    description: the subscription plan (e.g., free, monthly, annual).
     data_type: character varying
     nullable: false
 
-measures: 
-  - name: total_revenue
-    formula: sum(total_revenue)
-    description: total revenue generated from all payment transactions.
-  
-  - name: payment_count
-    formula: count(payment_id)
-    description: Total number of payment transactions.
+  - name: start_date
+    description: date when the subscription started.
+    data_type: timestamp without time zone
+    nullable: false
 
-  - name: avg_payment_amount
-    formula: avg(amount_usd)
-    description: Average payment amount across all transactions.
+  - name: end_date
+    description: date when the subscription ended (if applicable).
+    data_type: timestamp without time zone
+    nullable: true
+
+  - name: status
+    description: current status of the subscription (e.g., active, canceled, expired).
+    data_type: character varying
+    nullable: false
+
+measures:
+  - name: subscription_id_count
+    formula: count(subscription_id)
+    description: Total number of records in subscriptions.
+
+  - name: earliest_start_date
+    formula: min(start_date)
+    description: Earliest start_date.
+
+  - name: latest_start_date
+    formula: max(start_date)
+    description: Most recent start_date.
+
+  - name: earliest_end_date
+    formula: min(end_date)
+    description: Earliest end_date.
+
+  - name: latest_end_date
+    formula: max(end_date)
+    description: Most recent end_date.
+
+golden_queries:
+  - name: active_subscriptions_by_plan
+    description: count of active subscriptions grouped by plan.
+    sql: |
+      select
+          sub.plan,
+          count(sub.subscription_id) as active_count
+      from subscriptions as sub
+      where sub.status = 'active'
+      group by sub.plan
+      order by active_count desc;
+
+  - name: subscription_status_by_device
+    description: subscription count by status and user device type using an explicit join to users.
+    sql: |
+      select
+          u.device_type,
+          sub.status,
+          count(sub.subscription_id) as subscription_count
+      from subscriptions as sub
+      inner join users as u
+          on sub.user_id = u.user_id
+      group by u.device_type, sub.status
+      order by u.device_type, subscription_count desc;
 
