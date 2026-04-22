@@ -78,12 +78,11 @@ golden_queries:
     description: subscription count by status and user device type using an explicit join to users.
     sql: |
       select
-          u.device_type,
-          sub.status,
-          count(sub.subscription_id) as subscription_count
+        u.device_type,
+        sub.status,
+        count(sub.subscription_id) as subscription_count
       from subscriptions as sub
-      inner join users as u
-          on sub.user_id = u.user_id
+        inner join users as u on sub.user_id = u.user_id
       group by u.device_type, sub.status
       order by u.device_type, subscription_count desc;
 

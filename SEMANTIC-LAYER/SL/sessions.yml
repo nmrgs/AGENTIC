@@ -74,13 +74,12 @@ golden_queries:
     description: total sessions and average duration per user country using an explicit join to users.
     sql: |
       select
-          u.country,
-          count(s.session_id) as session_count,
-          avg(s.duration_minutes) as avg_duration,
-          sum(s.duration_minutes) as total_duration
+        u.country,
+        count(s.session_id) as session_count,
+        avg(s.duration_minutes) as avg_duration,
+        sum(s.duration_minutes) as total_duration
       from sessions as s
-      inner join users as u
-          on s.user_id = u.user_id
+        inner join users as u on s.user_id = u.user_id
       group by u.country
       order by session_count desc;
 
