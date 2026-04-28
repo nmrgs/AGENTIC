@@ -27,12 +27,13 @@ DB_CONFIG = {
 # Hint: Use the same psycopg2 connection pattern shown in `get_schema`.
 
 @mcp.tool()
-async def execute_sql(sql: str) -> List[Disct]:
+async def execute_sql(sql: str) -> List[Dict]:
     """ Returns the result of an sql query as a list of dictionaries """
     with psycopg2.connect(**DB_CONFIG) as conn:
         with conn.cursor() as cur:
-            cur.execute(sql, (table,))
-            rows = [{"column": r[0], "type": r[1]} for r in cur.fetchall()]
+            cur.execute(sql)
+            columns = [desc[0] for desc in cur.description]
+            rows = [dict(zip(columns, r)) for r in cur.fetchall()]
     return rows
 
 
@@ -41,6 +42,22 @@ async def execute_sql(sql: str) -> List[Disct]:
 #  - Take no inputs
 #  - Return the list of table names available in the current database
 # Hint: Query `information_schema.tables` and filter for `table_schema = 'public'`.
+
+@mcp.tool()
+async def list_tables() -> List[str]:
+    """ Return the list of table names available in the database """ 
+    sql = """
+        SELECT table_name
+        FROM information_schema.tables 
+        WHERE table_schema='public' 
+        """ 
+        
+    with psycopg2.connect(**DB_CONFIG) as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql)
+            rows = [r[0] for r in cur.fetchall()]
+    return rows
+
 
 @mcp.tool()
 async def get_schema(table: str) -> List[Dict]:
