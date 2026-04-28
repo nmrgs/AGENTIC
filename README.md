@@ -1,2 +1,2 @@
 # AGENTIC
-learning - teaching
+learning
