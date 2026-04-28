@@ -12,14 +12,14 @@ Model Context Protocol (MCP) connects AI assistants to external tools and data. 
 
 ### 1. Install Dependencies
 
-> **Note:** This project uses Poetry for dependency management. If you don't have Poetry installed, you can install it with:
+> **Note:** This project uses uv for dependency management. If you don't have uv installed, you can install it with:
 > ```bash
-> curl -sSL https://install.python-poetry.org | python3 -
+> curl -LsSf https://astral.sh/uv/install.sh | sh
 > ```
-> See the [official Poetry documentation](https://python-poetry.org/docs/#installation) for alternative installation methods.
+> See the [official uv documentation](https://docs.astral.sh/uv/getting-started/installation/) for alternative installation methods.
 
 ```bash
-poetry install
+uv sync
 ```
 
 ### 2. Configure Database
@@ -46,7 +46,7 @@ DB_PORT=5432
 > **Note:** The Inspector runs via `npx`, so you need Node.js (which includes npm). If you don't have it installed, get it from the official Node.js installer.
 
 ```bash
-npx @modelcontextprotocol/inspector poetry run python postgres-mcp-server/main.py
+npx @modelcontextprotocol/inspector uv run python postgres-mcp-server/main.py
 ```
 
 This opens a web UI where you can:
@@ -57,7 +57,7 @@ This opens a web UI where you can:
 ### Quick Test
 
 ```bash
-poetry run python postgres-mcp-server/main.py
+uv run python postgres-mcp-server/main.py
 ```
 
 Press `Ctrl+C` to stop. No errors = working correctly.
@@ -74,8 +74,8 @@ Add to your Cursor MCP config (global settings):
 {
   "mcpServers": {
     "postgres": {
-      "command": "poetry",
-      "args": ["-C", "/absolute/path/to/postgres-mcp-server", "run", "python", "postgres-mcp-server/main.py"]
+      "command": "uv",
+      "args": ["run", "--project", "/absolute/path/to/postgres-mcp-server", "python", "postgres-mcp-server/main.py"]
     }
   }
 }

@@ -13,8 +13,8 @@ venv/
 env/
 ENV/
 
-# Poetry
-poetry.lock
+# uv
+uv.lock
 
 # IDE
 .vscode/
