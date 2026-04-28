@@ -26,6 +26,15 @@ DB_CONFIG = {
 #  - Return the rows as a list of dictionaries (column_name → value)
 # Hint: Use the same psycopg2 connection pattern shown in `get_schema`.
 
+@mcp.tool()
+async def execute_sql(sql: str) -> List[Disct]:
+    """ Returns the result of an sql query as a list of dictionaries """
+    with psycopg2.connect(**DB_CONFIG) as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql, (table,))
+            rows = [{"column": r[0], "type": r[1]} for r in cur.fetchall()]
+    return rows
+
 
 # TODO: Implement a third MCP tool called `list_tables`
 # This function should:
