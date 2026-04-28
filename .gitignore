@@ -1,2 +1,3 @@
 .pgpass
 .pg_service.conf
+.DS_Store
