@@ -14,8 +14,8 @@ env/
 ENV/
 .venv
 
-# Poetry
-# poetry.lock is committed for reproducible builds
+# uv
+# uv.lock is committed for reproducible builds
 
 # IDE
 .vscode/
@@ -32,3 +32,6 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+
+/plans

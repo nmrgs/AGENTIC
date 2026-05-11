@@ -17,33 +17,31 @@ This approach combines the flexibility of LLMs with the reliability of pandas op
 ### Prerequisites
 
 - **Python 3.9 or higher** (3.9, 3.10, 3.11, 3.12, or 3.13) - **Note**: Python 3.9.7 is not supported due to a Streamlit compatibility issue
-- **Poetry** (dependency manager)
+- **uv** (dependency manager)
 - **OpenAI API Key**
 
 ### Installation Steps
 
-1. **Install Poetry** (if not already installed):
-   
-   **Windows (PowerShell)**:
-   ```powershell
-   (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
-   ```
+1. **Install uv** (if not already installed):
    
    **macOS/Linux**:
    ```bash
-   curl -sSL https://install.python-poetry.org | python3 -
+   curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
    
-   After installation, restart your terminal. If `poetry` command is not found:
-   - **Windows**: Add `%APPDATA%\Python\Scripts` to your system PATH
-   - **macOS/Linux**: Add `export PATH="$HOME/.local/bin:$PATH"` to your `~/.bashrc` or `~/.zshrc`
+   **Windows (PowerShell)**:
+   ```powershell
+   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+   ```
+   
+   After installation, restart your terminal.
 
 2. **Install dependencies**:
    ```bash
-   poetry install
+   uv sync
    ```
    
-   This will install all dependencies with the exact versions specified in `poetry.lock`, ensuring consistency across all environments.
+   This will install all dependencies with the exact versions specified in `uv.lock`, ensuring consistency across all environments.
 
 3. **Set up your OpenAI API key**:
    
@@ -67,14 +65,14 @@ This approach combines the flexibility of LLMs with the reliability of pandas op
 If you have multiple Python versions installed and want to use a specific one:
 
 ```bash
-# Tell Poetry which Python to use
-poetry env use python3.11  # or python3.9, python3.10, python3.12, etc.
+# Tell uv which Python to use
+uv python pin 3.11  # or 3.9, 3.10, 3.12, etc.
 
 # Then install dependencies
-poetry install
+uv sync
 ```
 
-Poetry will create a virtual environment with your chosen Python version.
+uv will create a virtual environment with your chosen Python version.
 
 ## Usage
 
@@ -83,7 +81,7 @@ Poetry will create a virtual environment with your chosen Python version.
 The easiest way to use the agent is through the web interface:
 
 ```bash
-poetry run streamlit run app.py
+uv run streamlit run app.py
 ```
 
 Then:
@@ -137,8 +135,8 @@ data-cleaning-agent/
 │   └── utils.py                # Utility functions
 ├── app.py                      # Streamlit interface
 ├── pyproject.toml              # Dependencies configuration
-├── poetry.lock                 # Locked dependency versions
+├── uv.lock                     # Locked dependency versions
 └── README.md
 ```
 
-**Important**: The `poetry.lock` file is committed to ensure all users get identical, tested dependency versions.
+**Important**: The `uv.lock` file is committed to ensure all users get identical, tested dependency versions.
