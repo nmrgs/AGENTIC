@@ -5,6 +5,10 @@ from langgraph.graph import StateGraph, START, END
 from dotenv import load_dotenv
 from pathlib import Path
 import io
+from rich import print
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", message=".*allowed_objects.*")
 
 # Load environment variables from .env file
 load_dotenv()
@@ -104,6 +108,13 @@ def remove_outliers(state: DataState) -> DataState:
     state["df"] = df
     return state
 
+def handle_missing_and_outliers(state: DataState) -> DataState:
+    """Handles missing values and outliers"""
+    state = remove_outliers(state)
+    state = handle_missing_values(state)
+    return state 
+    
+
 
 def describe_data(state: DataState) -> DataState:
     """Describe numeric columns after any cleaning."""
@@ -125,6 +136,7 @@ def route_action(state: DataState) -> str:
     mapping = {
         "clean_missing": "handle_missing_values",
         "remove_outliers": "remove_outliers",
+        "both": "handle_missing_and_outliers",
         "none": "describe_data",
     }
     return mapping.get(state["action"], "describe_data")
@@ -141,6 +153,7 @@ workflow.add_node("summarize_data", summarize_data)
 workflow.add_node("reasoning_node", reasoning_node)
 workflow.add_node("handle_missing_values", handle_missing_values)
 workflow.add_node("remove_outliers", remove_outliers)
+workflow.add_node("handle_missing_and_outliers", handle_missing_and_outliers)
 workflow.add_node("describe_data", describe_data)
 workflow.add_node("output_results", output_results)
 
@@ -150,10 +163,12 @@ workflow.add_edge("summarize_data", "reasoning_node")
 workflow.add_conditional_edges("reasoning_node", route_action, {
     "handle_missing_values": "handle_missing_values",
     "remove_outliers": "remove_outliers",
+    "handle_missing_and_outliers":"handle_missing_and_outliers",
     "describe_data": "describe_data",
 })
 workflow.add_edge("handle_missing_values", "describe_data")
 workflow.add_edge("remove_outliers", "describe_data")
+workflow.add_edge("handle_missing_and_outliers", "describe_data")
 workflow.add_edge("describe_data", "output_results")
 workflow.add_edge("output_results", END)
 
@@ -175,16 +190,16 @@ def save_graph_visualization():
         print(f"Could not generate graph visualization: {e}\n")
 
 
-# ---------------------------
-# 7. Run Example
-# ---------------------------
+# # ---------------------------
+# # 7. Run Example
+# # ---------------------------
 
 if __name__ == "__main__":
     # Save workflow visualization
     save_graph_visualization()
     
     # Run the workflow
-    csv_path = str(PROJECT_ROOT / "data" / "missing.csv")
+    csv_path = str(PROJECT_ROOT / "data" / "missing_and_outliers.csv")
     init_state: DataState = {
         "csv_path": csv_path,
         "df": None,
