@@ -29,15 +29,15 @@ The workflow follows these steps:
    ```
    If not installed, download from [python.org](https://www.python.org/downloads/)
 
-2. **Install Poetry**:
+2. **Install uv**:
    ```powershell
-   (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
+   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
    ```
-   After installation, restart your terminal or IDE. If `poetry` command is not found, add `%APPDATA%\Python\Scripts` to your system PATH.
+   After installation, restart your terminal or IDE.
 
 3. **Install dependencies**:
    ```powershell
-   poetry install
+   uv sync
    ```
 
 4. **Set up your OpenAI API key**:
@@ -48,14 +48,14 @@ The workflow follows these steps:
 
 ### macOS/Linux
 
-1. **Install Poetry** (if not already installed):
+1. **Install uv** (if not already installed):
    ```bash
-   curl -sSL https://install.python-poetry.org | python3 -
+   curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
 
 2. **Install dependencies**:
    ```bash
-   poetry install
+   uv sync
    ```
 
 3. **Set up your OpenAI API key**:
@@ -68,7 +68,7 @@ The workflow follows these steps:
 
 From the project root:
 ```bash
-poetry run python workflows/simple_clean_data_workflow.py
+uv run python workflows/simple_clean_data_workflow.py
 ```
 
 The workflow will:
