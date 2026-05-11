@@ -21,7 +21,8 @@ class PythonOutputParser(BaseOutputParser):
 
 def get_dataframe_summary(df: pd.DataFrame) -> str:
     """
-    Generate a simple summary of a DataFrame for the LLM.
+    Generate a detailed summary of a DataFrame for the LLM, including
+    distributions for numeric columns and value counts for categorical columns.
     
     Parameters
     ----------
@@ -33,21 +34,71 @@ def get_dataframe_summary(df: pd.DataFrame) -> str:
     str
         A text summary of the DataFrame.
     """
+    num_rows, num_cols = df.shape
+
+    # Column types
+    column_types = "\n".join([f"  {col}: {dtype}" for col, dtype in df.dtypes.items()])
+
+    # Missing values
     missing_stats = (df.isna().sum() / len(df) * 100).sort_values(ascending=False)
-    missing_summary = "\n".join([f"{col}: {val:.2f}%" for col, val in missing_stats.items()])
-    
-    column_types = "\n".join([f"{col}: {dtype}" for col, dtype in df.dtypes.items()])
-    
-    summary = f"""
-        Dataset Summary:
-        ----------------
-        Column Data Types:
-        {column_types}
+    missing_summary = "\n".join([f"  {col}: {val:.1f}%" for col, val in missing_stats.items()])
 
-        Missing Value Percentage:
-        {missing_summary}"""
+    # Duplicate rows
+    dup_count = df.duplicated().sum()
 
-    return summary.strip()
+    # Numeric column distributions with IQR and outlier info
+    numeric_cols = df.select_dtypes(include="number").columns.tolist()
+    numeric_summary_parts = []
+    for col in numeric_cols:
+        desc = df[col].describe()
+        q1 = desc['25%']
+        q3 = desc['75%']
+        iqr = q3 - q1
+        lower_bound = q1 - 1.5 * iqr
+        upper_bound = q3 + 1.5 * iqr
+        outlier_count = int(((df[col] < lower_bound) | (df[col] > upper_bound)).sum())
+        numeric_summary_parts.append(
+            f"  {col}: min={desc['min']:.2f}, 25%={q1:.2f}, "
+            f"median={desc['50%']:.2f}, 75%={q3:.2f}, max={desc['max']:.2f}, "
+            f"mean={desc['mean']:.2f}, std={desc['std']:.2f}, "
+            f"IQR_bounds=[{lower_bound:.2f}, {upper_bound:.2f}], outliers={outlier_count}"
+        )
+    numeric_summary = "\n".join(numeric_summary_parts) if numeric_summary_parts else "  (none)"
+
+    # Categorical column distributions (top 5 values)
+    categorical_cols = df.select_dtypes(include=["object", "category"]).columns.tolist()
+    categorical_summary_parts = []
+    for col in categorical_cols:
+        top_values = df[col].value_counts(dropna=False).head(5)
+        values_str = ", ".join([f"{v}={c}" for v, c in top_values.items()])
+        n_unique = df[col].nunique(dropna=False)
+        categorical_summary_parts.append(f"  {col} ({n_unique} unique): {values_str}")
+    categorical_summary = "\n".join(categorical_summary_parts) if categorical_summary_parts else "  (none)"
+
+    # Sample rows
+    sample = df.head(3).to_string(index=False)
+
+    summary = f"""Dataset Summary:
+----------------
+Shape: {num_rows} rows × {num_cols} columns
+Duplicate Rows: {dup_count}
+
+Column Data Types:
+{column_types}
+
+Missing Value Percentage:
+{missing_summary}
+
+Numeric Column Distributions:
+{numeric_summary}
+
+Categorical Column Value Counts (top 5):
+{categorical_summary}
+
+Sample Rows (first 3):
+{sample}"""
+
+    return summary
 
 
 def execute_agent_code(state, data_key, code_snippet_key, result_key, error_key, agent_function_name):

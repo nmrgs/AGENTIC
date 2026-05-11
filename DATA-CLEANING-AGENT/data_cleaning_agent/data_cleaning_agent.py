@@ -201,29 +201,39 @@ def make_lightweight_data_cleaning_agent(
         # TODO: Expand this prompt with more detailed cleaning instructions
         data_cleaning_prompt = PromptTemplate(
             template="""
-            You are a Data Cleaning Agent. Create a {function_name}() function to clean the data.
+You are a Data Cleaning Agent. Create a {function_name}() function to clean the data.
 
-            Basic Cleaning Steps to implement:
-            1. Remove columns with more than 40% missing values
-            2. Impute missing values (mean for numeric, mode for categorical)
-            3. Remove duplicate rows
+Evaluate each of the following cleaning steps based on the dataset summary below.
+Apply a step ONLY if the data shows it is needed. Skip steps that don't apply.
 
-            User Instructions:
-            {user_instructions}
+Cleaning Checklist:
+1. Drop High-Missing Columns: Remove columns with more than 40% missing values.
+2. Remove Duplicates: Drop exact duplicate rows, keeping the first occurrence.
+3. Outlier Handling: For numeric columns with outliers beyond 1.5×IQR bounds (shown in summary), cap values at the IQR bounds (lower_bound and upper_bound). Do NOT remove rows.
+4. String Normalization: For string/object columns, strip leading/trailing whitespace. Apply title case for name-like columns, lowercase for other categorical columns.
+5. Type Coercion: If a string column contains values that look like dates (e.g., '2024-01-01', 'Jan 5 2023'), convert to datetime. If a string column contains numeric-looking values (e.g., '123', '45.6'), convert to the appropriate numeric type.
+6. Low-Variance Column Removal: Remove columns where a single value accounts for more than 95% of non-null rows (these carry no useful information).
+7. Impute Missing Values: After all other steps, impute remaining missing values — use column mean for numeric columns, mode (most frequent value) for categorical columns.
 
-            Dataset Summary:
-            {all_datasets_summary}
+User Instructions (override or extend the above if provided):
+{user_instructions}
 
-            Return Python code in ```python``` format with a single function:
+Dataset Summary:
+{all_datasets_summary}
 
-            def {function_name}(data_raw):
-                import pandas as pd
-                import numpy as np
-                # Your cleaning code here
-                return data_cleaned
+Return Python code in ```python``` format with a single function:
 
-            Important: Ensure fit_transform() outputs are flattened with .ravel() when assigning to DataFrame columns.
-            """,
+def {function_name}(data_raw):
+    import pandas as pd
+    import numpy as np
+    # Your cleaning code here
+    return data_cleaned
+
+Important:
+- Only apply steps where the dataset summary shows an actual issue.
+- Ensure fit_transform() outputs are flattened with .ravel() when assigning to DataFrame columns.
+- Add a brief inline comment before each cleaning step explaining what it does and why.
+""",
             input_variables=["user_instructions", "all_datasets_summary", "function_name"]
         )
 
