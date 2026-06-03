@@ -1,3 +1,5 @@
 .pgpass
 .pg_service.conf
 .DS_Store
+.cortex/
+.env
