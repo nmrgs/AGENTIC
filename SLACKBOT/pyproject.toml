@@ -1,0 +1,13 @@
+[project]
+name = "slackbot"
+version = "0.1.0"
+description = ""
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+slackbot = "slackbot.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
