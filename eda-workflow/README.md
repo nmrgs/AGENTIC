@@ -11,6 +11,18 @@ The workflow follows a sequential process:
 
 This approach combines deterministic pandas-based analysis with LLM-powered interpretation.
 
+## Analysis Tools
+
+The workflow runs the following analysis tools sequentially:
+
+1. **Dataset Profiling** — Basic statistics: shape, dtypes, numeric/categorical summaries
+2. **Missingness Analysis** — Missing value counts, percentages, and high-missing columns (>20%)
+3. **Compute Aggregates** — Group-by aggregates on categorical columns (≤20 unique values) and time-based analysis (daily transaction counts, daily sums)
+4. **Analyze Relationships** — Correlation matrix with strong pairs (|r| > 0.7) and categorical influence on numeric columns
+5. **Outlier Detection** — IQR-based outlier detection (1.5x) for each numeric column
+
+After each tool, the LLM extracts 1-2 concise observations. Once all tools have run, a final synthesis step summarizes findings and provides actionable recommendations.
+
 ## Setup
 
 ### Prerequisites

@@ -50,6 +50,7 @@ analysis_steps = [
     ("analyze_missingness", "Missingness Analysis"),
     ("compute_aggregates", "Aggregates Analysis"),
     ("analyze_relationships", "Relationships Analysis"),
+    ("detect_outliers", "Outlier Detection"),
 ]
 
 for step_key, step_title in analysis_steps:

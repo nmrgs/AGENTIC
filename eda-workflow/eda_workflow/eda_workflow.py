@@ -220,15 +220,68 @@ def make_eda_baseline_workflow(
         }
     
     def compute_aggregates_node(state: EDAState):
-        """Compute group-by aggregates on key columns.
-        
-        TODO: Implement this analysis tool.
-        
-        See profile_dataset_node and analyze_missingness_node for reference.
-        Store your results in results["compute_aggregates"] and return
-        {"current_step": "compute_aggregates", "results": results}.
-        """
+        """Compute group-by aggregates on key columns."""
         logger.info("Computing aggregates")
+        df = pd.DataFrame.from_dict(state.get("dataframe"))
+        results = state.get("results", {})
+
+        numeric_cols = df.select_dtypes(include=["number"]).columns.tolist()
+        categorical_cols = df.select_dtypes(include=["object", "category"]).columns.tolist()
+
+        # --- Categorical group-by aggregates ---
+        group_aggregates = {}
+        for group_col in categorical_cols:
+            if df[group_col].nunique() > 20:
+                continue
+            if not numeric_cols:
+                break
+            grouped = df.groupby(group_col)[numeric_cols].agg(["mean", "sum", "count"])
+            grouped.columns = [f"{col}_{stat}" for col, stat in grouped.columns]
+            group_aggregates[group_col] = grouped.to_dict()
+
+        # --- Time-based aggregates ---
+        date_cols = df.select_dtypes(include=["datetime"]).columns.tolist()
+        if not date_cols:
+            for col in df.select_dtypes(include=["object"]).columns:
+                converted = pd.to_datetime(df[col], errors="coerce")
+                if converted.notna().sum() / len(df) > 0.5:
+                    df[col] = converted
+                    date_cols.append(col)
+
+        time_analysis = {}
+        for date_col in date_cols:
+            daily = df.groupby(df[date_col].dt.date)
+
+            time_analysis[date_col] = {
+                "date_range": {
+                    "start": str(df[date_col].min().date()),
+                    "end": str(df[date_col].max().date()),
+                },
+                "daily_transaction_count": {
+                    "mean": round(daily[numeric_cols[0]].count().mean(), 2),
+                    "max": int(daily[numeric_cols[0]].count().max()),
+                    "min": int(daily[numeric_cols[0]].count().min()),
+                },
+            }
+
+            if numeric_cols:
+                revenue_col = numeric_cols[-1]
+                time_analysis[date_col]["daily_sum"] = {
+                    "mean": round(daily[revenue_col].sum().mean(), 2),
+                    "max": round(daily[revenue_col].sum().max(), 2),
+                    "min": round(daily[revenue_col].sum().min(), 2),
+                }
+
+        computed_aggregates = {
+            "group_aggregates": group_aggregates,
+            "time_analysis": time_analysis,
+        }
+
+        results["compute_aggregates"] = computed_aggregates
+        return {
+            "current_step": "compute_aggregates",
+            "results": results,
+        }
     
     def analyze_relationships_node(state: EDAState):
         """Analyze relationships between variables.
@@ -240,6 +293,78 @@ def make_eda_baseline_workflow(
         {"current_step": "analyze_relationships", "results": results}.
         """
         logger.info("Analyzing relationships")
+        df = pd.DataFrame.from_dict(state.get("dataframe"))
+        results = state.get("results", {})
+
+        numeric_cols = df.select_dtypes(include=["number"]).columns.tolist()
+        categorical_cols = df.select_dtypes(include=["object", "category"]).columns.tolist()
+
+        # Correlation matrix + strong pairs
+        corr_matrix = df[numeric_cols].corr() if numeric_cols else pd.DataFrame()
+        strong_pairs = []
+        for i, col1 in enumerate(numeric_cols):
+            for col2 in numeric_cols[i + 1:]:
+                r = corr_matrix.loc[col1, col2]
+                if abs(r) > 0.7:
+                    strong_pairs.append({"col1": col1, "col2": col2, "correlation": round(r, 3)})
+
+        # Categorical influence on numeric columns
+        categorical_influence = {}
+        for cat_col in categorical_cols:
+            if df[cat_col].nunique() > 20:
+                continue
+            if not numeric_cols:
+                break
+            group_means = df.groupby(cat_col)[numeric_cols].mean()
+            influence = (group_means.std() / group_means.mean()).to_dict()
+            categorical_influence[cat_col] = influence
+
+        results["analyze_relationships"] = {
+            "correlation_matrix": corr_matrix.to_dict(),
+            "strong_correlations": strong_pairs,
+            "categorical_influence": categorical_influence,
+        }
+
+        return {
+            "current_step": "analyze_relationships",
+            "results": results,
+        }
+    def detect_outliers_node(state: EDAState):
+        """Detect outliers in numeric columns using the IQR method."""
+        logger.info("Detecting outliers")
+        df = pd.DataFrame.from_dict(state.get("dataframe"))
+        results = state.get("results", {})
+
+        numeric_cols = df.select_dtypes(include=["number"]).columns.tolist()
+
+        outliers = {}
+        for col in numeric_cols:
+            q1 = df[col].quantile(0.25)
+            q3 = df[col].quantile(0.75)
+            iqr = q3 - q1
+            lower_bound = q1 - 1.5 * iqr
+            upper_bound = q3 + 1.5 * iqr
+            outlier_mask = (df[col] < lower_bound) | (df[col] > upper_bound)
+            outlier_count = int(outlier_mask.sum())
+            outliers[col] = {
+                "count": outlier_count,
+                "percentage": round(outlier_count / len(df) * 100, 2),
+                "lower_bound": round(lower_bound, 2),
+                "upper_bound": round(upper_bound, 2),
+            }
+
+        results["detect_outliers"] = {
+            "method": "IQR (1.5x)",
+            "outliers_per_column": outliers,
+            "columns_with_outliers": [
+                col for col, info in outliers.items() if info["count"] > 0
+            ],
+        }
+
+        return {
+            "current_step": "detect_outliers",
+            "results": results,
+        }
     
     def extract_observations_node(state: EDAState):
         """Extract observations from the latest analysis results using LLM."""
@@ -321,6 +446,8 @@ def make_eda_baseline_workflow(
     workflow.add_node("extract_observations_3", extract_observations_node)
     workflow.add_node("analyze_relationships", analyze_relationships_node)
     workflow.add_node("extract_observations_4", extract_observations_node)
+    workflow.add_node("detect_outliers", detect_outliers_node)
+    workflow.add_node("extract_observations_5", extract_observations_node)
     workflow.add_node("synthesize_findings", synthesize_findings_node)
     
     workflow.set_entry_point("profile_dataset")
@@ -332,7 +459,9 @@ def make_eda_baseline_workflow(
     workflow.add_edge("compute_aggregates", "extract_observations_3")
     workflow.add_edge("extract_observations_3", "analyze_relationships")
     workflow.add_edge("analyze_relationships", "extract_observations_4")
-    workflow.add_edge("extract_observations_4", "synthesize_findings")
+    workflow.add_edge("extract_observations_4", "detect_outliers")
+    workflow.add_edge("detect_outliers", "extract_observations_5")
+    workflow.add_edge("extract_observations_5", "synthesize_findings")
     workflow.add_edge("synthesize_findings", END)
     
     app = workflow.compile(checkpointer=checkpointer, name=WORKFLOW_NAME)
