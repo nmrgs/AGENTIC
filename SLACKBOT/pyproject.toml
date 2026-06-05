@@ -3,7 +3,10 @@ name = "slackbot"
 version = "0.1.0"
 description = ""
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "slack-bolt",
+    "python-dotenv",
+]
 
 [project.scripts]
 slackbot = "slackbot.main:main"
