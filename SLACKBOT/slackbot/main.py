@@ -5,8 +5,11 @@ from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 from slackbot.intake import run as intake_run
+from slackbot.engine import run as engine_run
+from slackbot.engine.setup_datasets import ensure_datasets
 
 load_dotenv()
+ensure_datasets()
 
 app = App(token=os.environ["SLACK_BOT_TOKEN"])
 
@@ -30,7 +33,7 @@ def handle_dm(event, say):
 
 
 def _process_question(event, say):
-    """Run the intake pipeline and reply."""
+    """Run the intake pipeline, then engine if allowed."""
     raw_text = event.get("text", "")
 
     result = intake_run(raw_text)
@@ -39,8 +42,13 @@ def _process_question(event, say):
         say(f":x: {result.rejection_reason}")
         return
 
-    # Placeholder until engine subsystem is built
-    say(f":white_check_mark: Processing your question: _{result.question}_")
+    say(f":hourglass_flowing_sand: Looking into: _{result.question}_")
+
+    try:
+        engine_result = engine_run(result.question)
+        say(engine_result.answer)
+    except Exception as e:
+        say(f":warning: Something went wrong while processing your question: {e}")
 
 
 def main():

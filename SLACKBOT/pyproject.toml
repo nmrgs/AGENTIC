@@ -2,12 +2,16 @@
 name = "slackbot"
 version = "0.1.0"
 description = ""
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.12"
 dependencies = [
     "slack-bolt",
     "python-dotenv",
     "langchain-openai",
     "pyyaml",
+    "pandasai>=3.0.0,<4.0.0",
+    "pandasai-litellm>=0.0.1,<0.0.2",
+    "pandasai-sql>=0.1.7,<0.2.0",
+    "psycopg2-binary>=2.9.0,<3.0.0",
 ]
 
 [project.scripts]

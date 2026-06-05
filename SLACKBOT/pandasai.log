@@ -1,0 +1,1942 @@
+2026-06-05 03:10:28 [INFO] Question: How many users signed up per country?
+2026-06-05 03:10:28 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:10:28 [INFO] Prompt ID: 53f3dfdf-9734-4077-b6d6-e250ad885087
+2026-06-05 03:10:28 [INFO] Generating new code...
+2026-06-05 03:10:28 [INFO] An error occurred during code generation: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:28 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:28 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:28 [INFO] An error occurred during code generation: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:28 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/correct_execute_sql_query_usage_error_prompt.tmpl", line 1, in top-level template code
+    {% for df in context.dfs %}{% include 'shared/dataframe.tmpl' with context %}{% endfor %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:28 [INFO] Retrying Code Generation (1/3)...
+2026-06-05 03:10:28 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:28 [INFO] An error occurred during code generation: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:28 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/correct_execute_sql_query_usage_error_prompt.tmpl", line 1, in top-level template code
+    {% for df in context.dfs %}{% include 'shared/dataframe.tmpl' with context %}{% endfor %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:28 [INFO] Retrying Code Generation (2/3)...
+2026-06-05 03:10:28 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:28 [INFO] An error occurred during code generation: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:28 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/correct_execute_sql_query_usage_error_prompt.tmpl", line 1, in top-level template code
+    {% for df in context.dfs %}{% include 'shared/dataframe.tmpl' with context %}{% endfor %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:28 [INFO] Retrying Code Generation (3/3)...
+2026-06-05 03:10:28 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:28 [INFO] An error occurred during code generation: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:28 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/correct_execute_sql_query_usage_error_prompt.tmpl", line 1, in top-level template code
+    {% for df in context.dfs %}{% include 'shared/dataframe.tmpl' with context %}{% endfor %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:28 [INFO] Maximum retry attempts exceeded. Last error: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:57 [INFO] Question: how many users do we have
+2026-06-05 03:10:57 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:10:57 [INFO] Prompt ID: a17671ca-e0b3-4cca-bdf6-a2408f7688b8
+2026-06-05 03:10:57 [INFO] Generating new code...
+2026-06-05 03:10:57 [INFO] An error occurred during code generation: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:57 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:57 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:57 [INFO] An error occurred during code generation: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:57 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/correct_execute_sql_query_usage_error_prompt.tmpl", line 1, in top-level template code
+    {% for df in context.dfs %}{% include 'shared/dataframe.tmpl' with context %}{% endfor %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:57 [INFO] Retrying Code Generation (1/3)...
+2026-06-05 03:10:57 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:57 [INFO] An error occurred during code generation: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:57 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/correct_execute_sql_query_usage_error_prompt.tmpl", line 1, in top-level template code
+    {% for df in context.dfs %}{% include 'shared/dataframe.tmpl' with context %}{% endfor %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:57 [INFO] Retrying Code Generation (2/3)...
+2026-06-05 03:10:57 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:57 [INFO] An error occurred during code generation: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:57 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/correct_execute_sql_query_usage_error_prompt.tmpl", line 1, in top-level template code
+    {% for df in context.dfs %}{% include 'shared/dataframe.tmpl' with context %}{% endfor %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:57 [INFO] Retrying Code Generation (3/3)...
+2026-06-05 03:10:57 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:57 [INFO] An error occurred during code generation: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:10:57 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/generate_python_code_with_sql.tmpl", line 3, in top-level template code
+    {% include 'shared/dataframe.tmpl' with context %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 53, in execute_query
+    return load_function(connection_info, query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai_sql/__init__.py", line 31, in load_from_postgres
+    import psycopg2
+ModuleNotFoundError: No module named 'psycopg2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 30, in generate_code
+    self._context.logger.log(f"Using Prompt: {prompt}")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 56, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/base.py", line 51, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/correct_execute_sql_query_usage_error_prompt.tmpl", line 1, in top-level template code
+    {% for df in context.dfs %}{% include 'shared/dataframe.tmpl' with context %}{% endfor %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/core/prompts/templates/shared/dataframe.tmpl", line 1, in top-level template code
+    {{ df.serialize_dataframe() }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/base.py", line 152, in serialize_dataframe
+    return DataframeSerializer.serialize(self, dialect)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/helpers/dataframe_serializer.py", line 35, in serialize
+    dataframe_info += f' dimensions="{df.rows_count}x{df.columns_count}">'
+                                      ^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/dataframe/virtual_dataframe.py", line 44, in rows_count
+    return self._loader.get_row_count()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 84, in get_row_count
+    result = self.execute_query(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nouha.mohtadi/WORKSPACE/AGENTIC/SLACKBOT/.venv/lib/python3.11/site-packages/pandasai/data_loader/sql_loader.py", line 56, in execute_query
+    raise ImportError(
+ImportError: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+
+2026-06-05 03:10:57 [INFO] Maximum retry attempts exceeded. Last error: Postgres connector not found. Please install the pandasai_sql[postgres] library, e.g. `pip install pandasai_sql[postgres]`.
+2026-06-05 03:11:49 [INFO] Question: How many users signed up per country?
+2026-06-05 03:11:49 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:11:49 [INFO] Prompt ID: b4025730-eefd-4b97-9a68-6c9824422812
+2026-06-05 03:11:49 [INFO] Generating new code...
+2026-06-05 03:11:57 [INFO] Using Prompt: <tables>
+
+<table dialect="postgres" table_name="users" description="Each row represents a record in the users table." dimensions="20000x0">
+user_id,signup_date,country,device_type
+1,2024-06-02,Rest,iOS
+2,2024-03-20,India,Android
+3,2023-09-17,EU,Web
+4,2024-02-05,India,iOS
+5,2025-06-08,India,Web
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many users signed up per country?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-06-05 03:12:00 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+sql_query = """
+SELECT country, COUNT(*) AS signup_count
+FROM users
+GROUP BY country
+ORDER BY signup_count DESC
+"""
+
+df = execute_sql_query(sql_query)
+
+# Declare result var: 
+result = { "type": "dataframe", "value": df }
+2026-06-05 03:12:00 [INFO] Validating code requirements...
+2026-06-05 03:12:00 [INFO] Code validation successful.
+2026-06-05 03:12:00 [INFO] Cleaning the generated code...
+2026-06-05 03:12:00 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT country, COUNT(*) AS signup_count
+FROM users
+GROUP BY country
+ORDER BY signup_count DESC
+"""
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+2026-06-05 03:12:04 [INFO] Response generated successfully.
+2026-06-05 03:13:21 [INFO] Question: _how many users do we have_
+2026-06-05 03:13:21 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:13:21 [INFO] Prompt ID: c9fd3045-d92e-4037-9243-8044fa61f4a6
+2026-06-05 03:13:21 [INFO] Generating new code...
+2026-06-05 03:13:26 [INFO] Using Prompt: <tables>
+
+<table dialect="postgres" table_name="users" description="Each row represents a record in the users table." dimensions="20000x0">
+user_id,signup_date,country,device_type
+1,2024-06-02,Rest,iOS
+2,2024-03-20,India,Android
+3,2023-09-17,EU,Web
+4,2024-02-05,India,iOS
+5,2025-06-08,India,Web
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ _how many users do we have_
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-06-05 03:13:27 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Query to count the total number of users in the users table
+sql_query = """
+SELECT COUNT(*) AS total_users
+FROM users
+"""
+
+# Execute the query
+df = execute_sql_query(sql_query)
+
+# Extract the result as a number
+total_users = df.at[0, 'total_users']
+
+# Declare result variable
+result = { "type": "number", "value": total_users }
+2026-06-05 03:13:27 [INFO] Validating code requirements...
+2026-06-05 03:13:27 [INFO] Code validation successful.
+2026-06-05 03:13:27 [INFO] Cleaning the generated code...
+2026-06-05 03:13:27 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT COUNT(*) AS total_users
+FROM users
+"""
+df = execute_sql_query(sql_query)
+total_users = df.at[0, 'total_users']
+result = {'type': 'number', 'value': total_users}
+2026-06-05 03:13:30 [INFO] Response generated successfully.
+2026-06-05 03:13:48 [INFO] Question: what's the country that brings in the most revenue
+2026-06-05 03:13:48 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:13:48 [INFO] Prompt ID: 8a42412d-b479-48f7-9f67-3be4f3b918ec
+2026-06-05 03:13:48 [INFO] Generating new code...
+2026-06-05 03:14:01 [INFO] Using Prompt: <tables>
+
+<table dialect="postgres" table_name="payments" description="Each row represents a record in the payments table." dimensions="75624x0">
+payment_id,subscription_id,payment_date,amount_usd,method
+1,1,2024-07-25,10.0,card
+2,1,2024-08-24,10.0,paypal
+3,1,2024-09-23,10.0,apple_pay
+4,1,2024-10-23,10.0,paypal
+5,1,2024-11-22,10.0,card
+</table>
+
+
+<table dialect="postgres" table_name="subscriptions" description="Each row represents a record in the subscriptions table." dimensions="20000x0">
+subscription_id,user_id,plan,start_date,end_date,status
+1,1,monthly,2024-07-25,,active
+2,2,monthly,2024-04-19,,active
+3,3,monthly,2023-11-04,2024-01-03,expired
+4,4,free,2024-03-01,,active
+5,5,free,2025-08-14,,active
+</table>
+
+
+<table dialect="postgres" table_name="users" description="Each row represents a record in the users table." dimensions="20000x0">
+user_id,signup_date,country,device_type
+1,2024-06-02,Rest,iOS
+2,2024-03-20,India,Android
+3,2023-09-17,EU,Web
+4,2024-02-05,India,iOS
+5,2025-06-08,India,Web
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what's the country that brings in the most revenue
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-06-05 03:14:04 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to find the country with the highest total revenue from payments
+sql_query = """
+    SELECT u.country, SUM(p.amount_usd) AS total_revenue
+    FROM payments p
+    JOIN subscriptions s ON p.subscription_id = s.subscription_id
+    JOIN users u ON s.user_id = u.user_id
+    GROUP BY u.country
+    ORDER BY total_revenue DESC
+    LIMIT 1
+"""
+
+# Execute the query and get the result dataframe
+df_result = execute_sql_query(sql_query)
+
+# Extract the country with the highest revenue
+top_country = df_result.iloc[0]['country'] if not df_result.empty else None
+total_revenue = df_result.iloc[0]['total_revenue'] if not df_result.empty else 0
+
+result = {
+    "type": "string",
+    "value": f"The country that brings in the most revenue is {top_country} with a total revenue of ${total_revenue:.2f}."
+}
+2026-06-05 03:14:04 [INFO] Validating code requirements...
+2026-06-05 03:14:04 [INFO] Code validation successful.
+2026-06-05 03:14:04 [INFO] Cleaning the generated code...
+2026-06-05 03:14:04 [INFO] Executing code: import pandas as pd
+sql_query = """
+    SELECT u.country, SUM(p.amount_usd) AS total_revenue
+    FROM payments p
+    JOIN subscriptions s ON p.subscription_id = s.subscription_id
+    JOIN users u ON s.user_id = u.user_id
+    GROUP BY u.country
+    ORDER BY total_revenue DESC
+    LIMIT 1
+"""
+df_result = execute_sql_query(sql_query)
+top_country = df_result.iloc[0]['country'] if not df_result.empty else None
+total_revenue = df_result.iloc[0]['total_revenue'] if not df_result.empty else 0
+result = {'type': 'string', 'value': f'The country that brings in the most revenue is {top_country} with a total revenue of ${total_revenue:.2f}.'}
+2026-06-05 03:14:06 [INFO] Response generated successfully.
+2026-06-05 03:14:55 [INFO] Question: what's the country with the most revenue per user
+2026-06-05 03:14:55 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:14:55 [INFO] Prompt ID: c2ffef33-f4a9-4bae-b057-7c23ac9fe746
+2026-06-05 03:14:55 [INFO] Generating new code...
+2026-06-05 03:15:06 [INFO] Using Prompt: <tables>
+
+<table dialect="postgres" table_name="payments" description="Each row represents a record in the payments table." dimensions="75624x0">
+payment_id,subscription_id,payment_date,amount_usd,method
+1,1,2024-07-25,10.0,card
+2,1,2024-08-24,10.0,paypal
+3,1,2024-09-23,10.0,apple_pay
+4,1,2024-10-23,10.0,paypal
+5,1,2024-11-22,10.0,card
+</table>
+
+
+<table dialect="postgres" table_name="users" description="Each row represents a record in the users table." dimensions="20000x0">
+user_id,signup_date,country,device_type
+1,2024-06-02,Rest,iOS
+2,2024-03-20,India,Android
+3,2023-09-17,EU,Web
+4,2024-02-05,India,iOS
+5,2025-06-08,India,Web
+</table>
+
+
+<table dialect="postgres" table_name="subscriptions" description="Each row represents a record in the subscriptions table." dimensions="20000x0">
+subscription_id,user_id,plan,start_date,end_date,status
+1,1,monthly,2024-07-25,,active
+2,2,monthly,2024-04-19,,active
+3,3,monthly,2023-11-04,2024-01-03,expired
+4,4,free,2024-03-01,,active
+5,5,free,2025-08-14,,active
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what's the country with the most revenue per user
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-06-05 03:15:09 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+sql_query = """
+WITH user_revenue AS (
+    SELECT 
+        u.country,
+        s.user_id,
+        SUM(p.amount_usd) AS total_revenue
+    FROM payments p
+    JOIN subscriptions s ON p.subscription_id = s.subscription_id
+    JOIN users u ON s.user_id = u.user_id
+    GROUP BY u.country, s.user_id
+), 
+country_avg_revenue AS (
+    SELECT 
+        country,
+        AVG(total_revenue) AS avg_revenue_per_user
+    FROM user_revenue
+    GROUP BY country
+)
+SELECT country, avg_revenue_per_user
+FROM country_avg_revenue
+ORDER BY avg_revenue_per_user DESC
+LIMIT 1;
+"""
+
+df = execute_sql_query(sql_query)
+
+result = {"type": "dataframe", "value": df}
+2026-06-05 03:15:09 [INFO] Validating code requirements...
+2026-06-05 03:15:09 [INFO] Code validation successful.
+2026-06-05 03:15:09 [INFO] Cleaning the generated code...
+2026-06-05 03:15:09 [INFO] Executing code: import pandas as pd
+sql_query = """
+WITH user_revenue AS (
+    SELECT 
+        u.country,
+        s.user_id,
+        SUM(p.amount_usd) AS total_revenue
+    FROM payments p
+    JOIN subscriptions s ON p.subscription_id = s.subscription_id
+    JOIN users u ON s.user_id = u.user_id
+    GROUP BY u.country, s.user_id
+), 
+country_avg_revenue AS (
+    SELECT 
+        country,
+        AVG(total_revenue) AS avg_revenue_per_user
+    FROM user_revenue
+    GROUP BY country
+)
+SELECT country, avg_revenue_per_user
+FROM country_avg_revenue
+ORDER BY avg_revenue_per_user DESC
+LIMIT 1;
+"""
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+2026-06-05 03:15:11 [INFO] Response generated successfully.
+2026-06-05 03:17:45 [INFO] Question: What is the average session duration?
+2026-06-05 03:17:46 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:17:46 [INFO] Prompt ID: 22685d02-0700-44ac-a437-89fcfd4565e7
+2026-06-05 03:17:46 [INFO] Generating new code...
+2026-06-05 03:17:50 [INFO] Using Prompt: <tables>
+
+<table dialect="postgres" table_name="sessions" description="Each row represents a record in the sessions table." dimensions="2391407x0">
+session_id,user_id,session_date,duration_minutes,activity_type
+1,1,2024-08-07,9,browse
+2,1,2024-08-02,2,browse
+3,1,2024-08-10,6,listen
+4,1,2024-07-27,3,listen
+5,1,2024-07-29,14,browse
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the average session duration?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-06-05 03:17:51 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+sql_query = """
+    SELECT AVG(duration_minutes) AS avg_session_duration
+    FROM sessions
+"""
+
+df = execute_sql_query(sql_query)
+
+avg_session_duration = df.at[0, 'avg_session_duration']
+
+# Declare result var: 
+result = { "type": "number", "value": avg_session_duration }
+2026-06-05 03:17:51 [INFO] Validating code requirements...
+2026-06-05 03:17:51 [INFO] Code validation successful.
+2026-06-05 03:17:51 [INFO] Cleaning the generated code...
+2026-06-05 03:17:51 [INFO] Executing code: import pandas as pd
+sql_query = """
+    SELECT AVG(duration_minutes) AS avg_session_duration
+    FROM sessions
+"""
+df = execute_sql_query(sql_query)
+avg_session_duration = df.at[0, 'avg_session_duration']
+result = {'type': 'number', 'value': avg_session_duration}
+2026-06-05 03:17:54 [INFO] Response generated successfully.
+2026-06-05 03:18:20 [INFO] Question: how many rows are in table sessions
+2026-06-05 03:18:20 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:18:20 [INFO] Prompt ID: fe8914e0-240c-472e-b88d-de085caa137d
+2026-06-05 03:18:20 [INFO] Generating new code...
+2026-06-05 03:18:24 [INFO] Using Prompt: <tables>
+
+<table dialect="postgres" table_name="sessions" description="Each row represents a record in the sessions table." dimensions="2391407x0">
+session_id,user_id,session_date,duration_minutes,activity_type
+1,1,2024-08-07,9,browse
+2,1,2024-08-02,2,browse
+3,1,2024-08-10,6,listen
+4,1,2024-07-27,3,listen
+5,1,2024-07-29,14,browse
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ how many rows are in table sessions
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-06-05 03:18:26 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+sql_query = "SELECT COUNT(*) AS row_count FROM sessions;"
+
+df = execute_sql_query(sql_query)
+
+row_count = df.at[0, "row_count"]
+
+# Declare result var:
+result = { "type": "number", "value": row_count }
+2026-06-05 03:18:26 [INFO] Validating code requirements...
+2026-06-05 03:18:26 [INFO] Code validation successful.
+2026-06-05 03:18:26 [INFO] Cleaning the generated code...
+2026-06-05 03:18:26 [INFO] Executing code: import pandas as pd
+sql_query = 'SELECT COUNT(*) AS row_count FROM sessions'
+df = execute_sql_query(sql_query)
+row_count = df.at[0, 'row_count']
+result = {'type': 'number', 'value': row_count}
+2026-06-05 03:18:28 [INFO] Response generated successfully.
