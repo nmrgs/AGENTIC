@@ -13,7 +13,7 @@ def _configure_llm():
     pai.config.set({"llm": llm})
 
 
-def query(question: str, tables: list[str]) -> str:
+def query(question: str, tables: list[str]):
     """Load the specified datasets and ask PandasAI the question.
 
     Parameters
@@ -25,8 +25,8 @@ def query(question: str, tables: list[str]) -> str:
 
     Returns
     -------
-    str
-        The response from PandasAI (text, DataFrame string, or chart path).
+    object
+        The raw response from PandasAI (NumberResponse, DataFrameResponse, ChartResponse, or string).
     """
     _configure_llm()
 
@@ -38,4 +38,4 @@ def query(question: str, tables: list[str]) -> str:
     agent = Agent(datasets)
     response = agent.chat(question)
 
-    return str(response)
+    return response

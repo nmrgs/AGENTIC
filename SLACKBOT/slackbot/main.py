@@ -6,6 +6,7 @@ from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 from slackbot.intake import run as intake_run
 from slackbot.engine import run as engine_run
+from slackbot.output import run as output_run
 from slackbot.engine.setup_datasets import ensure_datasets
 
 load_dotenv()
@@ -33,8 +34,9 @@ def handle_dm(event, say):
 
 
 def _process_question(event, say):
-    """Run the intake pipeline, then engine if allowed."""
+    """Run the full pipeline: intake → engine → output."""
     raw_text = event.get("text", "")
+    channel = event.get("channel")
 
     result = intake_run(raw_text)
 
@@ -46,7 +48,24 @@ def _process_question(event, say):
 
     try:
         engine_result = engine_run(result.question)
-        say(engine_result.answer)
+        formatted = output_run(result.question, engine_result.raw_response)
+
+        # Send the plain English summary
+        say(formatted.summary)
+
+        # Send text data (table or number) if present
+        if formatted.text_data:
+            say(formatted.text_data)
+
+        # Upload chart image if present
+        if formatted.chart_path:
+            app.client.files_upload_v2(
+                channel=channel,
+                file=formatted.chart_path,
+                title="Chart",
+                initial_comment="",
+            )
+
     except Exception as e:
         say(f":warning: Something went wrong while processing your question: {e}")
 

@@ -1,6 +1,7 @@
 """Engine pipeline — routes question to relevant tables and queries via PandasAI."""
 
 from dataclasses import dataclass
+from typing import Any
 
 from slackbot.engine.router import route
 from slackbot.engine.agent import query
@@ -8,7 +9,7 @@ from slackbot.engine.agent import query
 
 @dataclass
 class EngineResult:
-    answer: str
+    raw_response: Any
     tables_used: list[str]
 
 
@@ -23,12 +24,12 @@ def run(question: str) -> EngineResult:
     Returns
     -------
     EngineResult
-        The answer from PandasAI and which tables were used.
+        The raw PandasAI response and which tables were used.
     """
     tables = route(question)
-    answer = query(question, tables)
+    response = query(question, tables)
 
     return EngineResult(
-        answer=answer,
+        raw_response=response,
         tables_used=tables,
     )

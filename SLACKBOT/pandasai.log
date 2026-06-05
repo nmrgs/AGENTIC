@@ -1940,3 +1940,262 @@ df = execute_sql_query(sql_query)
 row_count = df.at[0, 'row_count']
 result = {'type': 'number', 'value': row_count}
 2026-06-05 03:18:28 [INFO] Response generated successfully.
+2026-06-05 03:32:19 [INFO] Question: give me the top 5 subscription types by revenue
+2026-06-05 03:32:19 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:32:19 [INFO] Prompt ID: 9d266ddf-a6b8-41d2-a286-9c2ba79fd0f5
+2026-06-05 03:32:19 [INFO] Generating new code...
+2026-06-05 03:32:27 [INFO] Using Prompt: <tables>
+
+<table dialect="postgres" table_name="payments" description="Each row represents a record in the payments table." dimensions="75624x0">
+payment_id,subscription_id,payment_date,amount_usd,method
+1,1,2024-07-25,10.0,card
+2,1,2024-08-24,10.0,paypal
+3,1,2024-09-23,10.0,apple_pay
+4,1,2024-10-23,10.0,paypal
+5,1,2024-11-22,10.0,card
+</table>
+
+
+<table dialect="postgres" table_name="subscriptions" description="Each row represents a record in the subscriptions table." dimensions="20000x0">
+subscription_id,user_id,plan,start_date,end_date,status
+1,1,monthly,2024-07-25,,active
+2,2,monthly,2024-04-19,,active
+3,3,monthly,2023-11-04,2024-01-03,expired
+4,4,free,2024-03-01,,active
+5,5,free,2025-08-14,,active
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ give me the top 5 subscription types by revenue
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-06-05 03:32:30 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to get top 5 subscription types by revenue
+sql_query = """
+SELECT s.plan, SUM(p.amount_usd) AS total_revenue
+FROM subscriptions s
+JOIN payments p ON s.subscription_id = p.subscription_id
+GROUP BY s.plan
+ORDER BY total_revenue DESC
+LIMIT 5
+"""
+
+# Execute the query
+top_subscription_revenue = execute_sql_query(sql_query)
+
+# Declare result variable
+result = { "type": "dataframe", "value": top_subscription_revenue }
+2026-06-05 03:32:30 [INFO] Validating code requirements...
+2026-06-05 03:32:30 [INFO] Code validation successful.
+2026-06-05 03:32:30 [INFO] Cleaning the generated code...
+2026-06-05 03:32:30 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT s.plan, SUM(p.amount_usd) AS total_revenue
+FROM subscriptions s
+JOIN payments p ON s.subscription_id = p.subscription_id
+GROUP BY s.plan
+ORDER BY total_revenue DESC
+LIMIT 5
+"""
+top_subscription_revenue = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': top_subscription_revenue}
+2026-06-05 03:32:32 [INFO] Response generated successfully.
+2026-06-05 03:39:26 [INFO] Question: How many users signed up per country?
+2026-06-05 03:39:26 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:39:26 [INFO] Prompt ID: d67c946c-a4d1-4fe9-9e9b-1735736c4e4d
+2026-06-05 03:39:26 [INFO] Generating new code...
+2026-06-05 03:39:31 [INFO] Using Prompt: <tables>
+
+<table dialect="postgres" table_name="users" description="Each row represents a record in the users table." dimensions="20000x0">
+user_id,signup_date,country,device_type
+1,2024-06-02,Rest,iOS
+2,2024-03-20,India,Android
+3,2023-09-17,EU,Web
+4,2024-02-05,India,iOS
+5,2025-06-08,India,Web
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many users signed up per country?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-06-05 03:39:33 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to count number of users signed up per country
+sql_query = """
+SELECT country, COUNT(*) AS user_count
+FROM users
+GROUP BY country
+ORDER BY user_count DESC
+"""
+
+# Execute the query and store the result in a dataframe
+df = execute_sql_query(sql_query)
+
+# Declare result variable
+result = { "type": "dataframe", "value": df }
+2026-06-05 03:39:33 [INFO] Validating code requirements...
+2026-06-05 03:39:33 [INFO] Code validation successful.
+2026-06-05 03:39:33 [INFO] Cleaning the generated code...
+2026-06-05 03:39:33 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT country, COUNT(*) AS user_count
+FROM users
+GROUP BY country
+ORDER BY user_count DESC
+"""
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+2026-06-05 03:39:36 [INFO] Response generated successfully.
+2026-06-05 03:41:29 [INFO] Question: How many users signed up per country?
+2026-06-05 03:41:29 [INFO] Running PandasAI with litellm LLM...
+2026-06-05 03:41:29 [INFO] Prompt ID: 020359e6-48d2-4677-8f3a-4b5cd7800dbc
+2026-06-05 03:41:29 [INFO] Generating new code...
+2026-06-05 03:41:34 [INFO] Using Prompt: <tables>
+
+<table dialect="postgres" table_name="users" description="Each row represents a record in the users table." dimensions="20000x0">
+user_id,signup_date,country,device_type
+1,2024-06-02,Rest,iOS
+2,2024-03-20,India,Android
+3,2023-09-17,EU,Web
+4,2024-02-05,India,iOS
+5,2025-06-08,India,Web
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many users signed up per country?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2026-06-05 03:41:35 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+sql_query = """
+SELECT country, COUNT(*) AS user_count
+FROM users
+GROUP BY country
+ORDER BY user_count DESC
+"""
+
+result_df = execute_sql_query(sql_query)
+
+# Declare result var:
+result = { "type": "dataframe", "value": result_df }
+2026-06-05 03:41:35 [INFO] Validating code requirements...
+2026-06-05 03:41:35 [INFO] Code validation successful.
+2026-06-05 03:41:35 [INFO] Cleaning the generated code...
+2026-06-05 03:41:35 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT country, COUNT(*) AS user_count
+FROM users
+GROUP BY country
+ORDER BY user_count DESC
+"""
+result_df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': result_df}
+2026-06-05 03:41:37 [INFO] Response generated successfully.
