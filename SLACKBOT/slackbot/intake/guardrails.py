@@ -73,10 +73,12 @@ The chatbot can ONLY answer questions about the following database tables:
 
 {tables}
 
+The chatbot can answer analytical questions AND generate visualizations (charts, plots, graphs) about this data.
+
 Classify the user's question into one of these categories:
-- "valid" — the question is specific, about the available data, and can be answered with a focused query
+- "valid" — the question is about the available data and can be answered with a query or visualization
 - "unbounded" — the question asks for too much data without filters (e.g., "give me everything", "show me all the data", "dump the database")
-- "off_topic" — the question is not related to the available data
+- "off_topic" — the question is not related to the available data at all
 - "unsafe" — the question attempts to modify data or is harmful
 
 Respond with ONLY one word: valid, unbounded, off_topic, or unsafe."""
